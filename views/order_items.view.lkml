@@ -105,9 +105,11 @@ view: order_items {
     sql: ${sale_price} ;;
   }
 
-  measure: gross_revenue {
+  measure: total_gross_revenue {
     type: sum
     sql: ${sale_price} - ${products.cost}   ;;
+    filters: [status: "Cancelled"
+              ,status: "Returned"]
   }
 
 

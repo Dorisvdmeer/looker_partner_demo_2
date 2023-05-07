@@ -63,9 +63,18 @@ view: orders {
   # measures for this dimension, but you can also add measures of many different aggregates.
   # Click on the type parameter to see all the options in the Quick Help panel on the right.
 
-  measure: total_num_of_item {
+  measure: number_of_items {
     type: sum
     sql: ${num_of_item} ;;
+  }
+
+  measure: number_of_items_returned {
+    type: sum
+    sql: ${num_of_item} ;;
+    filters: {
+      field: status
+      value: "Returned"
+    }
   }
 
   measure: average_num_of_item {

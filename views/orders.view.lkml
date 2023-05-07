@@ -92,6 +92,11 @@ view: orders {
     sql: ${number_of_items_returned} /  ${number_of_items_sold};;
   }
 
+  measure: number_of_customers {
+    type: count_distinct
+    sql: ${user_id} ;;
+  }
+
   measure: number_of_customers_returning_items {
     type: count_distinct
     sql: ${user_id} ;;
@@ -99,6 +104,12 @@ view: orders {
       field: status
       value: "Returned"
     }
+  }
+
+  measure: percentage_users_with_returns {
+    type: number
+    sql: ${number_of_customers_returning_items} / ${number_of_customers} ;;
+    value_format_name: percent_2
   }
 
   measure: average_num_of_item {

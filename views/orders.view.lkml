@@ -68,6 +68,15 @@ view: orders {
     sql: ${num_of_item} ;;
   }
 
+  measure: number_of_items_sold {
+    type: sum
+    sql: ${num_of_item} ;;
+    filters: {
+      field: status
+      value: "Shipped, Completed, Processing"
+    }
+  }
+
   measure: number_of_items_returned {
     type: sum
     sql: ${num_of_item} ;;
@@ -75,6 +84,12 @@ view: orders {
       field: status
       value: "Returned"
     }
+  }
+
+  measure: item_return_rate {
+    type: number
+    value_format_name: percent_2
+    sql: ${number_of_items_returned} /  ${number_of_items_sold};;
   }
 
   measure: average_num_of_item {

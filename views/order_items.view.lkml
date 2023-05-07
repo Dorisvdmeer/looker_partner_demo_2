@@ -105,33 +105,34 @@ view: order_items {
     sql: ${sale_price} ;;
   }
 
-  measure: total_gross {
+  measure: gross_margin {
     type: sum
     sql: ${sale_price} - ${products.cost}   ;;
     filters: [status:  "Shipped, Complete, Processing"]
   }
 
-  # measure: total_gross_revenue {
-  #   type: sum
-  #   sql: ${total_gross}  ;;
-  #   filters: [status:  "Shipped, Complete, Processing"]
-  # }
-
   measure: total_revenue_completed_sales {
     type: sum
     sql:  ${sale_price} - ${products.cost}   ;;
-    filters: [status:  "Complete"]
+    filters: {
+      field: status
+      value: "Complete"
+    }
   }
 
   measure: total_cost_sold {
     type: sum
     sql: ${products.cost}   ;;
-    filters: [status:  "Shipped, Complete, Processing"]
+    filters: {
+      field: status
+      value: "Shipped, Complete, Processing"
+    }
   }
 
   # Total difference between the total revenue from completed sales and the
   # cost of the goods that were sold
   measure: total_gross_margin {
+    type: number
     sql: ${total_revenue_completed_sales} - ${total_cost_sold}   ;;
   }
 

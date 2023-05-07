@@ -143,7 +143,7 @@ view: order_items {
     sql: ${total_revenue_completed_sales} - ${total_cost_sold}   ;;
   }
 
-  measure: average_gross_percentage {
+  measure: gross_margin_percentage {
     type: number
     sql: ${total_gross_margin} / ${total_revenue_completed_sales} ;;
   }

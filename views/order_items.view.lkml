@@ -26,6 +26,7 @@ view: order_items {
       week,
       month,
       month_name,
+      month_num,
       quarter,
       year
     ]

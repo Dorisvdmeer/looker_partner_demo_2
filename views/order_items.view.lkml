@@ -112,6 +112,7 @@ view: order_items {
   }
 
   measure: total_revenue_completed_sales {
+    hidden: yes
     type: sum
     sql:  ${sale_price} - ${products.cost}   ;;
     filters: {
@@ -121,6 +122,7 @@ view: order_items {
   }
 
   measure: total_cost_sold {
+    hidden: yes
     type: sum
     sql: ${products.cost}   ;;
     filters: {
@@ -141,6 +143,10 @@ view: order_items {
     sql: ${total_revenue_completed_sales} - ${total_cost_sold}   ;;
   }
 
+  measure: average_gross_percentage {
+    type: number
+    sql: ${total_gross_margin} / ${total_revenue_completed_sales} ;;
+  }
 
   dimension_group: shipped {
     type: time

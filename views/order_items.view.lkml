@@ -114,6 +114,7 @@ view: order_items {
   measure: total_gross_revenue{
     type: sum
     sql: ${sale_price} - ${products.cost}   ;;
+    value_format_name: usd
     filters: [status:  "Shipped, Complete, Processing"]
   }
 

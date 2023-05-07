@@ -97,7 +97,7 @@ view: order_items {
 
   measure: average_spend_per_customer {
     type:  number
-    value_format_name: percent_2
+    value_format_name: usd
     sql: ${total_sale_price} / ${orders.number_of_customers} ;;
   }
 

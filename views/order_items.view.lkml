@@ -95,6 +95,12 @@ view: order_items {
     sql: ${sale_price} ;;
   }
 
+  measure: average_spend_per_customer {
+    type:  number
+    value_format_name: percent_2
+    sql: ${total_sale_price} / ${orders.number_of_customers} ;;
+  }
+
   measure: average_sale_price {
     type: average
     sql: ${sale_price} ;;

@@ -149,6 +149,20 @@ view: order_items {
     sql: ${total_gross_margin} / ${total_revenue_completed_sales} ;;
   }
 
+  measure: number_of_items {
+    type: sum
+    sql: ${orders.num_of_item} ;;
+  }
+
+  measure: number_of_items_returned {
+    type: sum
+    sql: ${orders.num_of_item} ;;
+    filters: {
+      field: status
+      value: "Returned"
+    }
+  }
+
   dimension_group: shipped {
     type: time
     timeframes: [

@@ -110,7 +110,7 @@ view: order_items {
 
   measure: cumulative_total_sales{
     type: running_total
-    sql: ${sale_price} ;;
+    sql: ${total_sale_price} ;;
   }
 
   measure: total_gross_revenue{

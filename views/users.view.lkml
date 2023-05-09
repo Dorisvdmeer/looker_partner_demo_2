@@ -49,9 +49,6 @@ view: users {
     sql: ${id} ;;
   }
 
-  # type: number
-
-  # sql: RANK() OVER(PARTITION BY store ORDER BY order_value DESC)
 
   measure: total_users_previous_month {
     type: number

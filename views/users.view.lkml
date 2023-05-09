@@ -49,9 +49,14 @@ view: users {
     sql: ${id} ;;
   }
 
-  # measure: total_users_previous_month {
-  #   sql: count_distinct(${id}) OVER (PARTITION BY ${created_date})  ;;
-  # }
+  # type: number
+
+  # sql: RANK() OVER(PARTITION BY store ORDER BY order_value DESC)
+
+  measure: total_users_previous_month {
+    type: number
+    sql: count_distinct(${id}) OVER (PARTITION BY ${created_date})  ;;
+  }
 
   dimension: city {
     type: string

@@ -49,6 +49,10 @@ view: users {
     sql: ${id} ;;
   }
 
+  # measure: total_users_previous_month {
+  #   sql: count_distinct(${id}) OVER (PARTITION BY ${created_date})  ;;
+  # }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;

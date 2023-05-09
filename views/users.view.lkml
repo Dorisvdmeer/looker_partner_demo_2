@@ -52,7 +52,7 @@ view: users {
 
   measure: total_users_previous_month {
     type: number
-    sql: count_distinct(${id}) OVER (PARTITION BY ${created_date})  ;;
+    sql: LAG(${total_users}) OVER (PARTITION BY ${created_date})  ;;
   }
 
   dimension: city {

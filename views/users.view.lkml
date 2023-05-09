@@ -44,6 +44,11 @@ view: users {
     sql: ${age} ;;
   }
 
+  measure: total_users {
+    type: count_distinct
+    sql: ${id} ;;
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;

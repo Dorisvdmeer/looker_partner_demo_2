@@ -77,19 +77,21 @@ view: users {
     sql: ${TABLE}.created_at ;;
   }
 
+  # https://community.looker.com/lookml-5/month-to-date-and-year-to-date-analysis-168
   dimension: is_before_mtd {
     type: yesno
-    sql: (DATEPART(DAY,${created_time}) < DATEPART(DAY,CURRENT_TIMESTAMP)
+    sql: (EXTRACT(day from ${created_raw} ) < EXTRACT(day from CURRENT_TIMESTAMP )
+
       OR
       (
-        DATEPART(DAY,${created_time}) = DATEPART(DAY,CURRENT_TIMESTAMP)  AND
-        DATEPART(HOUR,${created_time}) <  DATEPART(HOUR,CURRENT_TIMESTAMP)
+        EXTRACT(DAY from ${created_raw}) = EXTRACT(DAY from CURRENT_TIMESTAMP)  AND
+        EXTRACT(HOUR from ${created_raw}) <  EXTRACT(HOUR from CURRENT_TIMESTAMP)
       )
       OR
       (
-        DATEPART(DAY,${created_time}) <=  DATEPART(DAY,CURRENT_TIMESTAMP) AND
-        DATEPART(HOUR,${created_time}) <=  DATEPART(HOUR,CURRENT_TIMESTAMP) AND
-        DATEPART(MINUTE,${created_time}) <=  DATEPART(MINUTE,CURRENT_TIMESTAMP)
+        EXTRACT(DAY from ${created_raw}) <=  EXTRACT(DAY from CURRENT_TIMESTAMP) AND
+        EXTRACT(HOUR from ${created_raw}) <=  EXTRACT(HOUR from CURRENT_TIMESTAMP) AND
+        EXTRACT(MINUTE from ${created_raw}) <=  EXTRACT(MINUTE from CURRENT_TIMESTAMP)
       )
     ) ;;
   }

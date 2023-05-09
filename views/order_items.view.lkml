@@ -134,7 +134,7 @@ view: order_items {
   }
 
   measure: total_revenue_completed_sales {
-    hidden: yes
+    #hidden: yes
     type: sum
     sql:  ${sale_price} - ${products.cost}   ;;
     filters: {
@@ -144,7 +144,7 @@ view: order_items {
   }
 
   measure: total_cost_sold {
-    hidden: yes
+    #hidden: yes
     type: sum
     sql: ${products.cost}   ;;
     filters: {

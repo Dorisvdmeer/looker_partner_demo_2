@@ -46,6 +46,7 @@ view: products {
   measure: average_cost {
     type: average
     sql: ${cost} ;;
+    value_format_name: usd
   }
 
   dimension: department {

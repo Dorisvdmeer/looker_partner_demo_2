@@ -121,6 +121,18 @@ view: order_items {
     filters: [status:  "Shipped, Complete, Processing"]
   }
 
+  measure: oi_total_cost {
+    type: sum
+    sql: ${products.cost} ;;
+    value_format_name: usd
+  }
+
+  measure: oi_average_cost {
+    type: average
+    sql: ${products.cost} ;;
+    value_format_name: usd
+  }
+
   measure: total_revenue_completed_sales {
     hidden: yes
     type: sum

@@ -49,12 +49,6 @@ view: users {
     sql: ${id} ;;
   }
 
-
-  measure: total_users_previous_month {
-    type: number
-    sql: LAG(${total_users}) OVER (PARTITION BY ${created_date})  ;;
-  }
-
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
@@ -82,6 +76,13 @@ view: users {
     ]
     sql: ${TABLE}.created_at ;;
   }
+
+  measure: total_users_previous_month {
+    type: number
+    sql: LAG(${total_users}) OVER (PARTITION BY   ${TABLE}.created_at ORDER BY  ${TABLE}.created_at asc)  ;;
+  }
+
+#PARTITION BY division ORDER BY finish_time ASC
 
   dimension: email {
     type: string

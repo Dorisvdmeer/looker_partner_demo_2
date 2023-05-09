@@ -77,12 +77,27 @@ view: users {
     sql: ${TABLE}.created_at ;;
   }
 
-  measure: total_users_previous_month {
-    type: number
-    sql: LAG(${total_users}) OVER (PARTITION BY   ${TABLE}.created_at ORDER BY  ${TABLE}.created_at asc)  ;;
+  dimension: is_before_mtd {
+    type: yesno
+    sql: (DATEPART(DAY,${created_time}) < DATEPART(DAY,CURRENT_TIMESTAMP)
+      OR
+      (
+        DATEPART(DAY,${created_time}) = DATEPART(DAY,CURRENT_TIMESTAMP)  AND
+        DATEPART(HOUR,${created_time}) <  DATEPART(HOUR,CURRENT_TIMESTAMP)
+      )
+      OR
+      (
+        DATEPART(DAY,${created_time}) <=  DATEPART(DAY,CURRENT_TIMESTAMP) AND
+        DATEPART(HOUR,${created_time}) <=  DATEPART(HOUR,CURRENT_TIMESTAMP) AND
+        DATEPART(MINUTE,${created_time}) <=  DATEPART(MINUTE,CURRENT_TIMESTAMP)
+      )
+    ) ;;
   }
 
-#PARTITION BY division ORDER BY finish_time ASC
+
+
+
+
 
   dimension: email {
     type: string

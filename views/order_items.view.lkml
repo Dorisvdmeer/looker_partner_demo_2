@@ -114,7 +114,7 @@ view: order_items {
     sql: ${total_sale_price} ;;
   }
 
-  measure: total_gross_revenue{
+  measure: total_gross_revenue {
     type: sum
     sql: ${sale_price} - ${products.cost}   ;;
     value_format_name: usd
@@ -133,42 +133,26 @@ view: order_items {
     value_format_name: usd
   }
 
-  measure: total_revenue_completed_sales {
-    #hidden: yes
+  # Total difference between the total revenue from completed sales and the
+  # cost of the goods that were sold
+  measure: total_gross_margin {
     type: sum
-    sql:  ${sale_price} - ${products.cost}   ;;
+    sql: ${sale_price} - ${products.cost}   ;;
     filters: {
       field: status
       value: "Complete"
     }
   }
 
-  measure: total_cost_sold {
-    #hidden: yes
-    type: sum
-    sql: ${products.cost}   ;;
-    filters: {
-      field: status
-      value: "Shipped, Complete, Processing"
-    }
-  }
-
-  # Total difference between the total revenue from completed sales and the
-  # cost of the goods that were sold
-  measure: total_gross_margin {
-    type: number
-    sql: ${total_revenue_completed_sales} - ${total_cost_sold}   ;;
-  }
-
-  measure: average_gross_margin {
-    type: average
-    sql: ${total_revenue_completed_sales} - ${total_cost_sold}   ;;
-  }
+  # measure: average_gross_margin {
+  #   type: average
+  #   sql: ${total_gross_margin}   ;;
+  # }
 
   measure: gross_margin_percentage {
     type: number
     value_format_name: percent_2
-    sql: ${total_gross_margin} / ${total_revenue_completed_sales} ;;
+    sql: ${total_gross_margin} / ${total_gross_revenue} ;;
   }
 
   dimension_group: shipped {

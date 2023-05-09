@@ -156,7 +156,7 @@ view: order_items {
   measure: gross_margin_percentage {
     type: number
     value_format_name: percent_2
-    sql: ${total_gross_margin} / ${total_gross_revenue} ;;
+    sql: ${total_gross_margin} /  NULLIF(${total_gross_revenue}, 0)  ;;
   }
 
   dimension_group: shipped {

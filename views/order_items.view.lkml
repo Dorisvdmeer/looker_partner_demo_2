@@ -144,10 +144,14 @@ view: order_items {
     }
   }
 
-  # measure: average_gross_margin {
-  #   type: average
-  #   sql: ${total_gross_margin}   ;;
-  # }
+  measure: average_gross_margin {
+    type: average
+    sql: ${sale_price} - ${products.cost}   ;;
+    filters: {
+      field: status
+      value: "Complete"
+    }
+  }
 
   measure: gross_margin_percentage {
     type: number

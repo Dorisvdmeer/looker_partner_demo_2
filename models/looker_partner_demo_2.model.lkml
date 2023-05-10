@@ -90,12 +90,6 @@ explore: order_items {
     relationship: many_to_one
   }
 
-  join: events  {
-    type: left_outer
-    sql_on: ${users.id} = ${events.user_id} ;;
-    relationship: one_to_many
-  }
-
 }
 
 explore: events {

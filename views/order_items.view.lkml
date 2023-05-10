@@ -90,7 +90,7 @@ view: order_items {
 
   dimension: source {
     type:  string
-    sql: ${events.traffic_source} ;;
+    sql: ${users.traffic_source} ;;
   }
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average

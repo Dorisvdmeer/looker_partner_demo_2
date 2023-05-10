@@ -98,12 +98,8 @@ view: users {
   # https://community.looker.com/lookml-5/month-to-date-and-year-to-date-analysis-168
   dimension: is_new_user {
     type: yesno
-    sql: ${created_raw}  >=  DATE_ADD(CURRENT_DATE(), INTERVAL -90 DAY)   ;;
+    sql: ${created_date}  >=  DATE_ADD(CURRENT_DATE(), INTERVAL -90 DAY)   ;;
   }
-
-
-
-
 
 
   dimension: email {

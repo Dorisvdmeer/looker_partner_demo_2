@@ -77,7 +77,6 @@ view: users {
     sql: ${TABLE}.created_at ;;
   }
 
-  # https://community.looker.com/lookml-5/month-to-date-and-year-to-date-analysis-168
   dimension: is_before_mtd {
     type: yesno
     sql: (EXTRACT(day from ${created_raw} ) < EXTRACT(day from CURRENT_TIMESTAMP )
@@ -94,6 +93,12 @@ view: users {
         EXTRACT(MINUTE from ${created_raw}) <=  EXTRACT(MINUTE from CURRENT_TIMESTAMP)
       )
     ) ;;
+  }
+
+  # https://community.looker.com/lookml-5/month-to-date-and-year-to-date-analysis-168
+  dimension: is_new_user {
+    type: yesno
+    sql: ${created_raw}  >=  DATE_ADD(CURRENT_DATE(), INTERVAL -90 DAY)   ;;
   }
 
 
